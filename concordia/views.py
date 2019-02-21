@@ -46,6 +46,7 @@ from ratelimit.utils import is_ratelimited
 from concordia.forms import ContactUsForm, UserProfileForm, UserRegistrationForm
 from concordia.models import (
     Asset,
+    AssetTag,
     AssetTranscriptionReservation,
     Campaign,
     Item,
@@ -599,7 +600,8 @@ class AllTagsView(ListView):
     http_method_names = ["get"]
 
     def get_queryset(self):
-        tag_qs = Tag.objects.all()
+        tag_qs = AssetTag.objects.all()[:1000]
+
         return tag_qs
 
 
