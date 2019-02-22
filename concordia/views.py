@@ -55,7 +55,6 @@ from concordia.models import (
     Tag,
     Transcription,
     TranscriptionStatus,
-    UserAssetTagCollection,
 )
 from concordia.utils import get_anonymous_user, request_accepts_json
 from concordia.version import get_concordia_version
@@ -737,13 +736,12 @@ class AssetDetailView(DetailView):
 
         ctx["share_url"] = ctx["current_asset_url"]
 
-        tag_groups = UserAssetTagCollection.objects.filter(asset__slug=asset.slug)
+        asset_tags = AssetTag.objects.filter(asset=asset)
 
         tags = set()
 
-        for tag_group in tag_groups:
-            for tag in tag_group.tags.all():
-                tags.add(tag.value)
+        for asset_tag in asset_tags:
+            tags.add(asset_tag.tag.value)
 
         ctx["tags"] = sorted(tags)
 
@@ -915,9 +913,7 @@ def review_transcription(request, *, pk):
 def submit_tags(request, *, asset_pk):
     asset = get_object_or_404(Asset, pk=asset_pk)
 
-    user_tags, created = UserAssetTagCollection.objects.get_or_create(
-        asset=asset, user=request.user
-    )
+    user_tags, created = AssetTag.objects.get_or_create(asset=asset, user=request.user)
 
     tags = set(request.POST.getlist("tags"))
     existing_tags = Tag.objects.filter(value__in=tags)

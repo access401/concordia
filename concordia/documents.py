@@ -1,13 +1,10 @@
 from django.contrib.auth.models import User
 from django_elasticsearch_dsl import DocType, Index, fields
 
-from .models import Transcription, UserAssetTagCollection
+from .models import Transcription
 
 user = Index("users")
 user.settings(number_of_shards=1, number_of_replicas=0)
-
-tag_collection = Index("tags")
-tag_collection.settings(number_of_shards=1, number_of_replicas=0)
 
 transcription = Index("transcriptions")
 transcription.settings(number_of_shards=1, number_of_replicas=0)
@@ -19,36 +16,6 @@ class UserDocument(DocType):
         model = User
 
         fields = ["last_login", "date_joined", "username"]
-
-
-@tag_collection.doc_type
-class TagCollectionDocument(DocType):
-    tags = fields.NestedField(properties={"value": fields.TextField()})
-    asset = fields.ObjectField(
-        properties={
-            "title": fields.TextField(),
-            "slug": fields.TextField(),
-            "transcription_status": fields.TextField(),
-            "item": fields.ObjectField(
-                properties={
-                    "item_id": fields.TextField(),
-                    "project": fields.ObjectField(
-                        properties={
-                            "slug": fields.TextField(),
-                            "campaign": fields.ObjectField(
-                                properties={"slug": fields.TextField()}
-                            ),
-                        }
-                    ),
-                }
-            ),
-        }
-    )
-    user = fields.ObjectField(properties={"username": fields.TextField()})
-
-    class Meta:
-        model = UserAssetTagCollection
-        fields = ["created_on", "updated_on"]
 
 
 @transcription.doc_type
