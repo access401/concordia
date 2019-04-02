@@ -45,6 +45,7 @@ kombu = "~=4.5"
 django-flags = "*"
 channels = "*"
 channels-redis = "*"
+more-itertools = "*"
 
 [dev-packages]
 invoke = "*"
