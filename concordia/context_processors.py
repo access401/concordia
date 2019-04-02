@@ -16,6 +16,7 @@ def system_configuration(request):
         "APPLICATION_VERSION": get_concordia_version(),
         "RAVEN_CONFIG": settings.RAVEN_CONFIG,
         "ACTIVITY_UI_ENABLED": flag_enabled("ACTIVITY_UI", request=request),
+        "ADVERTISE_UI_ENABLED": flag_enabled("ADVERTISE_UI", request=request),
     }
 
 

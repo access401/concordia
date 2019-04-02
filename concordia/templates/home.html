@@ -15,7 +15,7 @@
                     <li data-target="#homepage-carousel" data-slide-to="0" class="active"></li>
                     <li data-target="#homepage-carousel" data-slide-to="1"></li>
                     <li data-target="#homepage-carousel" data-slide-to="2"></li>
-                    {% if ACTIVITY_UI_ENABLED %}
+                    {% if ADVERTISE_UI_ENABLED %}
                         <li data-target="#homepage-carousel" data-slide-to="3"></li>
                     {% endif %}
                 </ol>
@@ -29,7 +29,7 @@
                     <div class="carousel-item" data-title="Welcome Center" data-hero-text="Learn how to transcribe, review, and tag." data-link-url="{% url 'welcome-guide' %}">
                         <img class="d-block w-100" src="{% static 'img/homepage-carousel/welcome-guide.jpg' %}" alt="Collection of typed report pages by baseball scout Branch Rickey">
                     </div>
-                    {% if ACTIVITY_UI_ENABLED %}
+                    {% if ADVERTISE_UI_ENABLED %}
                         <div class="carousel-item" data-overlay-position="top-right" data-title="We made a thing" data-hero-text="Please try out this thing we made for you, our volunteers" data-link-url="{% url 'action-app' %}">
                             <img class="d-block w-100" src="{% static 'img/homepage-carousel/crowd-home.jpg' %}" alt="A crowd of young women cheering and waving handkerchiefs">
                         </div>
@@ -97,7 +97,7 @@
             <div class="col-12 d-flex justify-content-center my-3">
                 <a class="btn btn-primary" href="{% url 'transcriptions:campaign-list' %}" role="button">Browse All Campaigns</a>
             </div>
-            {% if ACTIVITY_UI_ENABLED %}
+            {% if ADVERTISE_UI_ENABLED %}
                  <div class="col-12 d-flex justify-content-center my-3">
                     <a class="btn btn-primary" href="{% url 'action-app' %}" role="button">Try the new thing</a>
                 </div>
