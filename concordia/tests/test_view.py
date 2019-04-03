@@ -822,10 +822,8 @@ class TransactionalViewTests(JSONAssertMixin, TransactionTestCase):
             data={"tags": test_tags},
         )
         data = self.assertValidJSON(resp, expected_status=200)
-        self.assertIn("user_tags", data)
         self.assertIn("all_tags", data)
 
-        self.assertEqual(sorted(test_tags), data["user_tags"])
         self.assertEqual(sorted(test_tags), data["all_tags"])
 
     def test_tag_submission_with_multiple_users(self):
@@ -839,10 +837,8 @@ class TransactionalViewTests(JSONAssertMixin, TransactionTestCase):
             data={"tags": test_tags},
         )
         data = self.assertValidJSON(resp, expected_status=200)
-        self.assertIn("user_tags", data)
         self.assertIn("all_tags", data)
 
-        self.assertEqual(sorted(test_tags), data["user_tags"])
         self.assertEqual(sorted(test_tags), data["all_tags"])
 
     def test_duplicate_tag_submission(self):
@@ -872,7 +868,6 @@ class TransactionalViewTests(JSONAssertMixin, TransactionTestCase):
 
         # Even though the user submitted (through some horrible bug) duplicate
         # values, they should not be stored:
-        self.assertEqual(["bar", "foo", "quux"], data["user_tags"])
         self.assertEqual(["baaz", "bar", "foo", "quux"], data["all_tags"])
 
     def test_find_next_transcribable(self):
