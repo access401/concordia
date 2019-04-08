@@ -869,6 +869,10 @@ def save_transcription(request, *, asset_pk):
         {
             "id": transcription.pk,
             "submissionUrl": reverse("submit-transcription", args=(transcription.pk,)),
+            "asset": {
+                "id": transcription.asset.id,
+                "status": transcription.asset.transcription_status,
+            },
         },
         status=201,
     )
@@ -895,7 +899,16 @@ def submit_transcription(request, *, pk):
     transcription.full_clean()
     transcription.save()
 
-    return JsonResponse({"id": transcription.pk}, status=200)
+    return JsonResponse(
+        {
+            "id": transcription.pk,
+            "asset": {
+                "id": transcription.asset.id,
+                "status": transcription.asset.transcription_status,
+            },
+        },
+        status=200,
+    )
 
 
 @require_POST
