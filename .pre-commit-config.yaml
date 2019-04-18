@@ -14,7 +14,7 @@ repos:
           - id: check-byte-order-marker
           - id: trailing-whitespace
           - id: mixed-line-ending
-            args: ["--fix=lf"]
+            args: ['--fix=lf']
           - id: check-merge-conflict
           - id: flake8
           - id: check-json
@@ -23,11 +23,11 @@ repos:
             args: ['--allow-missing-credentials']
           - id: detect-private-key
           - id: pretty-format-json
-            args: ["--autofix", "--no-sort-keys", "--indent=4"]
+            args: ['--autofix', '--no-sort-keys', '--indent=4']
           - id: check-ast
           - id: debug-statements
     - repo: https://github.com/prettier/prettier
-      rev: 1.16.4
+      rev: 1.17.0
       hooks:
           - id: prettier
             files: \.(css|less|scss|ts|tsx|graphql|gql|json|js|jsx|md)$
@@ -38,16 +38,16 @@ repos:
             additional_dependencies:
                 - eslint@5.16.0
                 - eslint-plugin-prettier@3.0.1
-                - prettier@1.16.4
-                - eslint-plugin-unicorn@8.0.1
+                - prettier@1.17.0
+                - eslint-plugin-unicorn@8.0.2
     - repo: https://github.com/awebdeveloper/pre-commit-stylelint
       rev: 0.0.2
       hooks:
           - id: stylelint
             additional_dependencies:
                 - stylelint@9.10.1
-                - stylelint-config-prettier@5.0.0
-                - stylelint-config-recommended@2.1.0
+                - stylelint-config-prettier@5.1.0
+                - stylelint-config-recommended@2.2.0
     - repo: https://github.com/awslabs/cfn-python-lint
       rev: v0.17.1
       hooks:
